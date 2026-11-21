@@ -1,0 +1,2 @@
+# KJBM-MINDS
+Education platform
