@@ -1,0 +1,981 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080808">
+<meta name="google-site-verification" content="XWf6OOLDaEIYY1qzo8JPEnIRw9fllyeb6rPT8HZWEIY">
+<title>KJBM MINDS | Official Community</title>
+<style>
+:root{--black:#080808;--panel:#121212;--gold:#d4af37;--gold2:#f3d77d;--line:#493a18;--white:#f7f5ed;--muted:#aaa}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(ellipse at 50% -15%,#33270c 0,#111 38%,var(--black) 75%);color:var(--white);font:16px/1.55 Arial,sans-serif}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+header{position:sticky;top:0;z-index:20;background:#080808ed;border-bottom:1px solid var(--line)}
+.head{max-width:1200px;margin:auto;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-size:1.35rem;font-weight:900;letter-spacing:2px;color:var(--gold)}
+.brand small{display:block;font-size:.58rem;letter-spacing:4px;color:#eee}
+.menu{display:none;background:#171717;border:1px solid var(--line);color:var(--gold);padding:9px 12px;border-radius:8px}
+.nav{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:5px}
+.nav button{background:transparent;color:#eee;border:1px solid transparent;border-radius:8px;padding:8px 10px;font-size:.85rem}
+.nav button:hover,.nav button.active{color:var(--gold2);border-color:var(--line);background:#d4af3712}
+main{max-width:1200px;margin:auto;padding:24px 18px 65px}
+.page{display:none}.page.active{display:block}
+.hero{min-height:420px;padding:55px 7%;display:flex;align-items:center;border:1px solid #66521e;border-radius:22px;background:linear-gradient(100deg,#080808f5,#090909a6),radial-gradient(circle at 85% 20%,#80601b,#151006 58%);box-shadow:0 20px 65px #0009}
+.eyebrow{color:var(--gold2);font-weight:bold;letter-spacing:4px;text-transform:uppercase;font-size:.76rem}
+.hero h1{font-size:clamp(2.5rem,7vw,5.2rem);line-height:1.02;margin:15px 0}
+.hero h1 span{color:var(--gold)}
+.hero p{max-width:680px;color:#ddd;font-size:1.08rem}
+.actions,.toolbar,.inline-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
+.btn{border:1px solid var(--gold);border-radius:9px;padding:10px 16px;font-weight:bold;background:linear-gradient(130deg,#f3d77d,#b58c20);color:#111}
+.btn.alt{background:transparent;color:var(--gold2)}
+.btn.danger{background:#391919;color:#ffdada;border-color:#783333}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.section{margin-top:30px}
+.section-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
+.section-title h2,h2{color:var(--gold);margin:0 0 12px}
+h3{color:var(--gold2)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.card,.panel{padding:18px;border:1px solid var(--line);border-radius:15px;background:linear-gradient(145deg,#191919,#0d0d0d);box-shadow:0 12px 28px #0005}
+.card h3,.panel h3{color:var(--gold2);margin:0 0 7px}
+.card p,.panel p{color:#ccc;margin:0 0 8px}
+.muted,.small{color:var(--muted)}.small{font-size:.82rem}
+.pill{display:inline-block;border:1px solid #6d5722;color:var(--gold2);border-radius:30px;padding:3px 9px;font-size:.76rem}
+.formgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.field{margin:12px 0;display:flex;flex-direction:column;gap:6px}
+.field label{color:#ddd;font-size:.9rem}
+.field input,.field textarea,.field select{width:100%;background:#080808;color:white;border:1px solid #5c4920;border-radius:8px;padding:12px;outline:none}
+.field input:focus,.field textarea:focus{border-color:var(--gold)}
+textarea{min-height:100px;resize:vertical}
+.status{color:var(--gold2);white-space:pre-wrap;margin-top:9px;font-size:.9rem}
+.notice{background:#211b0d;border:1px solid var(--line);border-radius:10px;padding:12px;color:#ddd;margin:12px 0}
+.list{margin-top:15px}
+.entry{padding:14px 0;border-bottom:1px solid #332a16;overflow-wrap:anywhere}
+.entry:last-child{border-bottom:0}
+.entry h3{color:var(--gold2);margin:0 0 5px}
+.entry p{margin:5px 0;color:#ddd;white-space:pre-wrap}
+.entry a,.link{color:var(--gold2)}
+.entry-meta{font-size:.8rem;color:var(--muted)}
+.media-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:15px}
+.media-card{padding:10px;border:1px solid var(--line);border-radius:11px;background:#111;overflow-wrap:anywhere}
+.media-card img,.media-card video{width:100%;height:150px;object-fit:cover;background:#222;border-radius:7px}
+.media-card strong{display:block;margin-top:8px;color:var(--gold2)}
+.progress{height:9px;background:#333;border-radius:20px;overflow:hidden;margin:10px 0}
+.progress span{display:block;height:100%;width:0;background:var(--gold);transition:width .15s}
+.hidden{display:none!important}
+.admin-tabs{display:flex;gap:7px;flex-wrap:wrap;margin:18px 0}
+.admin-tabs button{background:#171717;border:1px solid var(--line);color:var(--gold2);padding:9px 12px;border-radius:8px}
+.admin-tabs button.active{background:#4a3912;color:white;border-color:var(--gold)}
+.admin-section{display:none}.admin-section.active{display:block}
+.stat{font-size:2rem;color:var(--gold);font-weight:bold}
+.rules-code{white-space:pre;overflow:auto;background:#050505;color:#f3d77d;border:1px solid var(--line);border-radius:10px;padding:15px;font:12px/1.55 monospace;max-height:480px}
+.footer{text-align:center;border-top:1px solid var(--line);padding:25px;color:#999}
+@media(max-width:850px){.head{flex-wrap:wrap}.menu{display:block}.nav{display:none;width:100%;justify-content:flex-start}.nav.open{display:flex}.nav button{font-size:.8rem;padding:8px}.hero{min-height:360px;padding:35px 22px}}
+</style>
+</head>
+<body>
+<header>
+<div class="head">
+<div class="brand">KJBM MINDS<small>LEARN • SHARE • GROW</small></div>
+<button class="menu" id="menuBtn" type="button">☰ MENU</button>
+<nav class="nav" id="nav">
+<button class="active" data-page="home">Home</button>
+<button data-page="about">About Us</button>
+<button data-page="learning">Educational Materials</button>
+<button data-page="community">Community</button>
+<button data-page="photos">Photos</button>
+<button data-page="videos">Videos</button>
+<button data-page="documents">Documents</button>
+<button data-page="news">News</button>
+<button data-page="forum">Discussion Forum</button>
+<button data-page="members">Members</button>
+<button data-page="account">Login / Register</button>
+<button data-page="dashboard">Dashboard</button>
+<button data-page="admin" id="adminNav" class="hidden">Admin</button>
+<button data-page="contact">Contact</button>
+</nav>
+</div>
+</header>
+
+<main>
+<section class="page active" id="home">
+<div class="hero"><div>
+<div class="eyebrow">Knowledge • Unity • Innovation</div>
+<h1>WELCOME TO<br><span>KJBM MINDS</span></h1>
+<p>A community for education, learning, creativity and collaboration. Discover resources, share ideas, connect with members and grow together.</p>
+<div class="actions">
+<button class="btn" onclick="showPage('learning')">Explore Learning</button>
+<button class="btn alt" onclick="showPage('account')">Join the Community</button>
+</div>
+</div></div>
+<div class="section">
+<div class="section-title"><h2>Discover KJBM MINDS</h2><span class="pill">Official Community</span></div>
+<div class="grid">
+<div class="card"><h3>Education</h3><p>Share and discover useful learning materials.</p></div>
+<div class="card"><h3>Community</h3><p>Connect with members and exchange constructive ideas.</p></div>
+<div class="card"><h3>Media Library</h3><p>Browse community photographs, videos and downloads.</p></div>
+<div class="card"><h3>Announcements</h3><p>Stay informed about news and activities.</p></div>
+</div></div>
+<div class="section panel"><h2>Latest Announcements</h2><div id="homeNews" class="list">Loading...</div></div>
+</section>
+
+<section class="page" id="about">
+<div class="panel"><h2>About KJBM MINDS</h2>
+<p>KJBM MINDS is an education and community platform created to encourage knowledge sharing, creativity, collaboration and lifelong learning.</p>
+<div class="grid section">
+<div class="card"><h3>Our Mission</h3><p>To encourage learning and make useful knowledge easier to share.</p></div>
+<div class="card"><h3>Our Vision</h3><p>A connected, informed and empowered learning community.</p></div>
+<div class="card"><h3>Our Values</h3><p>Respect, integrity, curiosity, creativity and collaboration.</p></div>
+</div></div>
+</section>
+
+<section class="page" id="learning">
+<h2>Educational Materials</h2>
+<div class="panel"><p class="muted">Documents shared by community members appear here.</p><div id="learningList" class="list">Loading...</div></div>
+</section>
+
+<section class="page" id="community">
+<h2>Community</h2>
+<div class="panel">
+<h3>Community Rules</h3>
+<div id="publicRules" class="notice">Loading community rules...</div>
+</div>
+<div class="panel section">
+<h3>Share an update</h3>
+<div class="field"><label>Your update</label><textarea id="communityText" placeholder="Share a useful update..."></textarea></div>
+<button class="btn" onclick="createPost('posts','communityText','communityList')">Publish Update</button>
+<div id="communityList" class="list"></div>
+</div>
+</section>
+
+<section class="page" id="photos">
+<h2>Photo Gallery</h2>
+<div class="panel"><p class="muted">Sign in to upload photos.</p><div id="photoUploader"></div><div id="photoList" class="media-grid"></div></div>
+</section>
+
+<section class="page" id="videos">
+<h2>Video Library</h2>
+<div class="panel"><p class="muted">Sign in to upload videos.</p><div id="videoUploader"></div><div id="videoList" class="media-grid"></div></div>
+</section>
+
+<section class="page" id="documents">
+<h2>Documents & Downloads</h2>
+<div class="panel"><p class="muted">Share PDFs and common office documents with members.</p><div id="documentUploader"></div><div id="documentList" class="list"></div></div>
+</section>
+
+<section class="page" id="news">
+<h2>News & Announcements</h2>
+<div class="panel">
+<div id="newsAdmin" class="hidden">
+<h3>Publish announcement</h3>
+<div class="field"><label>Title</label><input id="newsTitle"></div>
+<div class="field"><label>Details</label><textarea id="newsBody"></textarea></div>
+<button class="btn" onclick="publishNews()">Publish News</button>
+</div>
+<div id="newsList" class="list">Loading...</div>
+</div>
+</section>
+
+<section class="page" id="forum">
+<h2>Discussion Forum</h2>
+<div class="panel">
+<div class="field"><label>Start a discussion</label><textarea id="forumText" placeholder="Ask a question or share an idea..."></textarea></div>
+<button class="btn" onclick="createPost('discussions','forumText','forumList')">Post Discussion</button>
+<div id="forumList" class="list"></div>
+</div>
+</section>
+
+<section class="page" id="members">
+<h2>Member Directory</h2>
+<div class="panel"><p class="muted">Registered member names are shown here.</p><div id="memberList" class="list">Loading...</div></div>
+</section>
+
+<section class="page" id="account">
+<h2>Member Accounts</h2>
+<div class="formgrid">
+<div class="panel">
+<h3>Create an account</h3>
+<div class="field"><label>Full name</label><input id="regName" autocomplete="name"></div>
+<div class="field"><label>Email address</label><input id="regEmail" type="email" autocomplete="email"></div>
+<div class="field"><label>Password (at least 6 characters)</label><input id="regPassword" type="password" autocomplete="new-password"></div>
+<button class="btn" onclick="registerUser()">Register</button>
+</div>
+<div class="panel">
+<h3>Sign in</h3>
+<div class="field"><label>Email address</label><input id="loginEmail" type="email" autocomplete="email"></div>
+<div class="field"><label>Password</label><input id="loginPassword" type="password" autocomplete="current-password"></div>
+<button class="btn" onclick="loginUser()">Sign In</button>
+<button class="btn alt" onclick="resetPassword()">Forgot Password?</button>
+<button class="btn danger" onclick="logoutUser()">Sign Out</button>
+</div>
+</div>
+<div id="authStatus" class="status"></div>
+</section>
+
+<section class="page" id="dashboard">
+<h2>Member Dashboard</h2>
+<div class="panel">
+<div id="dashboardInfo">Sign in to view your dashboard.</div>
+<div class="actions">
+<button class="btn" onclick="showPage('photos')">Upload Photo</button>
+<button class="btn" onclick="showPage('videos')">Upload Video</button>
+<button class="btn" onclick="showPage('documents')">Share Document</button>
+<button class="btn danger" onclick="logoutUser()">Sign Out</button>
+</div>
+</div>
+</section>
+
+<section class="page" id="admin">
+<h2>Administrator Dashboard</h2>
+<div class="panel">
+<div id="adminMessage">Administrator access is restricted.</div>
+<div id="adminPanel" class="hidden">
+<div class="grid">
+<div class="card"><div class="stat" id="statMembers">—</div><p>Registered members</p></div>
+<div class="card"><div class="stat" id="statUploads">—</div><p>Uploaded files</p></div>
+<div class="card"><div class="stat" id="statPosts">—</div><p>Community posts</p></div>
+<div class="card"><div class="stat" id="statMessages">—</div><p>Contact messages</p></div>
+</div>
+
+<div class="admin-tabs">
+<button class="active" onclick="adminTab('overview',this)">Overview</button>
+<button onclick="adminTab('rules',this)">Security Rules</button>
+<button onclick="adminTab('messages',this)">Messages</button>
+<button onclick="adminTab('membersAdmin',this)">Members</button>
+<button onclick="adminTab('uploadsAdmin',this)">Uploads</button>
+<button onclick="adminTab('contentAdmin',this)">Content</button>
+</div>
+
+<div class="admin-section active" id="admin-overview">
+<h3>Administrator Overview</h3>
+<p>Welcome to the KJBM MINDS control centre.</p>
+<div class="notice">Use the tabs above to manage website rules, members, uploads, messages and content.</div>
+</div>
+
+<div class="admin-section" id="admin-rules">
+<h3>Firebase Firestore Security Rules</h3>
+<p class="muted">These are the database access rules for the KJBM MINDS website. Copy them and publish them in Firebase Console.</p>
+<div class="notice">
+<strong>Important:</strong> This dashboard can display and copy rules. It cannot deploy them to Firebase automatically. After copying, open Firebase Console → Firestore Database → Rules, replace the existing rules and click Publish.
+</div>
+<button class="btn" onclick="copySecurityRules()">COPY ALL SECURITY RULES</button>
+<div id="rulesCopyStatus" class="status"></div>
+<pre class="rules-code" id="securityRulesDisplay"></pre>
+<h3 class="section">How to publish</h3>
+<ol>
+<li>Copy the rules using the button above.</li>
+<li>Open your Firebase project: <strong>kjbm-minds</strong>.</li>
+<li>Open Firestore Database.</li>
+<li>Select the Rules tab.</li>
+<li>Replace the rules with the copied text.</li>
+<li>Press Publish.</li>
+</ol>
+</div>
+
+<div class="admin-section" id="admin-messages">
+<h3>Contact Messages</h3>
+<div id="adminMessages" class="list">Loading...</div>
+</div>
+
+<div class="admin-section" id="admin-membersAdmin">
+<h3>Registered Members</h3>
+<div id="adminMembers" class="list">Loading...</div>
+</div>
+
+<div class="admin-section" id="admin-uploadsAdmin">
+<h3>Uploaded Files</h3>
+<div id="adminUploads" class="list">Loading...</div>
+</div>
+
+<div class="admin-section" id="admin-contentAdmin">
+<h3>Community Posts</h3>
+<div id="adminPosts" class="list">Loading...</div>
+<h3 class="section">Discussion Posts</h3>
+<div id="adminDiscussions" class="list">Loading...</div>
+<h3 class="section">Announcements</h3>
+<div id="adminNews" class="list">Loading...</div>
+</div>
+</div>
+</div>
+<p class="small muted">The administrator email is checked in this page. Firestore Security Rules must also enforce permissions on the database.</p>
+</section>
+
+<section class="page" id="contact">
+<h2>Contact KJBM MINDS</h2>
+<div class="grid">
+<div class="panel">
+<h3>Contact details</h3>
+<p>Email: <a class="link" href="mailto:johnmiraclekb652@gmail.com">johnmiraclekb652@gmail.com</a></p>
+<p class="muted">For questions, support and collaboration, contact the KJBM MINDS team.</p>
+</div>
+<div class="panel">
+<h3>Send us a message</h3>
+<div class="field"><label>Your name</label><input id="contactName"></div>
+<div class="field"><label>Your email</label><input id="contactEmail" type="email"></div>
+<div class="field"><label>Message</label><textarea id="contactMessage"></textarea></div>
+<button class="btn" onclick="sendContact()">Send Message</button>
+<div id="contactStatus" class="status"></div>
+</div>
+</div>
+</section>
+</main>
+
+<footer class="footer">© <span id="year"></span> KJBM MINDS • Learn • Share • Grow</footer>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script>
+'use strict';
+
+const FIREBASE_CONFIG={
+ apiKey:"AIzaSyBq41YUdJcsDUHNtBpEdv7JdF5D87dYp6k",
+ authDomain:"kjbm-minds.firebaseapp.com",
+ projectId:"kjbm-minds",
+ storageBucket:"kjbm-minds.firebasestorage.app",
+ messagingSenderId:"227909064382",
+ appId:"1:227909064382:web:586232a2233804565a70ef",
+ measurementId:"G-9KVQBP569S"
+};
+
+const CLOUDINARY_CLOUD="ldrdbzqf";
+const CLOUDINARY_PRESETS={
+ image:"kjbm_photos",
+ video:"kjbm_videos",
+ raw:"kjbm_documents"
+};
+const ADMIN_EMAIL="johnmiraclekb652@gmail.com";
+
+const FIRESTORE_RULES = `rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return signedIn()
+        && request.auth.token.email == 'johnmiraclekb652@gmail.com';
+    }
+
+    match /users/{userId} {
+      allow create: if signedIn()
+        && request.auth.uid == userId
+        && request.resource.data.role == 'member';
+
+      allow read: if signedIn()
+        && (request.auth.uid == userId || isAdmin());
+
+      allow update: if signedIn()
+        && (request.auth.uid == userId || isAdmin());
+
+      allow delete: if isAdmin();
+    }
+
+    match /publicProfiles/{userId} {
+      allow read: if true;
+      allow create, update: if signedIn()
+        && request.auth.uid == userId;
+      allow delete: if isAdmin();
+    }
+
+    match /news/{newsId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /posts/{postId} {
+      allow read: if true;
+      allow create: if signedIn()
+        && request.resource.data.uid == request.auth.uid;
+      allow update: if signedIn()
+        && resource.data.uid == request.auth.uid;
+      allow delete: if isAdmin()
+        || (signedIn() && resource.data.uid == request.auth.uid);
+    }
+
+    match /discussions/{postId} {
+      allow read: if true;
+      allow create: if signedIn()
+        && request.resource.data.uid == request.auth.uid;
+      allow update: if signedIn()
+        && resource.data.uid == request.auth.uid;
+      allow delete: if isAdmin()
+        || (signedIn() && resource.data.uid == request.auth.uid);
+    }
+
+    match /uploads/{uploadId} {
+      allow read: if true;
+      allow create: if signedIn()
+        && request.resource.data.uid == request.auth.uid;
+      allow update: if isAdmin();
+      allow delete: if isAdmin()
+        || (signedIn() && resource.data.uid == request.auth.uid);
+    }
+
+    match /contactMessages/{messageId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}`;
+
+let auth=null,db=null,currentUser=null,profile={};
+const $=id=>document.getElementById(id);
+const safe=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const stamp=()=>firebase.firestore.FieldValue.serverTimestamp();
+
+function status(id,message){
+ if($(id))$(id).textContent=message;
+}
+
+function admin(){
+ return !!currentUser &&
+ String(currentUser.email||"").toLowerCase()===ADMIN_EMAIL.toLowerCase();
+}
+
+function showPage(id){
+ document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+ if($(id))$(id).classList.add("active");
+ document.querySelectorAll(".nav button[data-page]").forEach(x=>x.classList.toggle("active",x.dataset.page===id));
+ $("nav").classList.remove("open");
+
+ if(id==="home")loadNews("homeNews",3);
+ if(id==="news")loadNews("newsList");
+ if(id==="community"){
+   loadPosts("posts","communityList");
+   loadCommunityRules();
+ }
+ if(id==="forum")loadPosts("discussions","forumList");
+ if(id==="members")loadMembers();
+ if(id==="learning")loadLearning();
+ if(["photos","videos","documents"].includes(id)){
+   setupUploader(id);
+   loadUploads(id);
+ }
+ if(id==="dashboard")renderDashboard();
+ if(id==="admin")loadAdmin();
+}
+
+document.querySelectorAll(".nav button[data-page]").forEach(b=>
+ b.addEventListener("click",()=>showPage(b.dataset.page))
+);
+$("menuBtn").addEventListener("click",()=>$("nav").classList.toggle("open"));
+$("year").textContent=new Date().getFullYear();
+
+function init(){
+ if(!window.firebase){
+   status("authStatus","Firebase did not load. Check your internet connection and refresh.");
+   return;
+ }
+ try{
+   if(!firebase.apps.length)firebase.initializeApp(FIREBASE_CONFIG);
+   auth=firebase.auth();
+   db=firebase.firestore();
+
+   $("securityRulesDisplay").textContent=FIRESTORE_RULES;
+
+   auth.onAuthStateChanged(async user=>{
+     currentUser=user;
+     profile={};
+     if(user){
+       try{
+         const s=await db.collection("users").doc(user.uid).get();
+         if(s.exists)profile=s.data()||{};
+       }catch(e){console.warn("Profile read:",e.message);}
+     }
+     updateInterface();
+   });
+ }catch(e){
+   console.error(e);
+   status("authStatus","Firebase initialization error: "+e.message);
+ }
+}
+
+function updateInterface(){
+ const signed=!!currentUser;
+ $("adminNav").classList.toggle("hidden",!admin());
+ $("newsAdmin").classList.toggle("hidden",!admin());
+
+ $("dashboardInfo").innerHTML=signed
+  ?`<p><b>Name:</b> ${safe(profile.name||currentUser.displayName||"Member")}</p>
+    <p><b>Email:</b> ${safe(currentUser.email)}</p>
+    <p><b>Account:</b> Signed in</p>`
+  :"Sign in to view your dashboard.";
+
+ $("adminMessage").textContent=admin()
+  ?"Administrator account verified."
+  :"Administrator access is restricted.";
+
+ $("adminPanel").classList.toggle("hidden",!admin());
+
+ document.querySelectorAll(".uploader-login").forEach(x=>x.classList.toggle("hidden",signed));
+ document.querySelectorAll(".uploader-form").forEach(x=>x.classList.toggle("hidden",!signed));
+
+ if(admin())loadAdmin();
+}
+
+async function registerUser(){
+ const name=$("regName").value.trim();
+ const email=$("regEmail").value.trim();
+ const password=$("regPassword").value;
+
+ if(!name||!email||password.length<6){
+   status("authStatus","Enter your name, a valid email and a password of at least 6 characters.");
+   return;
+ }
+ try{
+   const cred=await auth.createUserWithEmailAndPassword(email,password);
+   await cred.user.updateProfile({displayName:name});
+   await db.collection("users").doc(cred.user.uid).set({
+     name,email,createdAt:stamp(),role:"member"
+   });
+   await db.collection("publicProfiles").doc(cred.user.uid).set({
+     name,createdAt:stamp()
+   });
+   profile={name,email};
+   status("authStatus","Your account has been created.");
+ }catch(e){status("authStatus",e.message);}
+}
+
+async function loginUser(){
+ try{
+   await auth.signInWithEmailAndPassword(
+     $("loginEmail").value.trim(),
+     $("loginPassword").value
+   );
+   status("authStatus","You are signed in.");
+ }catch(e){status("authStatus",e.message);}
+}
+
+async function logoutUser(){
+ if(!auth)return;
+ try{
+   await auth.signOut();
+   status("authStatus","You have signed out.");
+ }catch(e){status("authStatus",e.message);}
+}
+
+async function resetPassword(){
+ const email=$("loginEmail").value.trim();
+ if(!email){
+   status("authStatus","Enter your email address in the sign-in box first.");
+   return;
+ }
+ try{
+   await auth.sendPasswordResetEmail(email);
+   status("authStatus","Password reset email sent. Check your inbox.");
+ }catch(e){status("authStatus",e.message);}
+}
+
+function mustSignIn(){
+ if(!currentUser){
+   alert("Please sign in before using this feature.");
+   showPage("account");
+   return false;
+ }
+ return true;
+}
+
+async function createPost(collection,inputId,target){
+ if(!mustSignIn())return;
+ const body=$(inputId).value.trim();
+ if(!body){alert("Write a message first.");return;}
+ try{
+   await db.collection(collection).add({
+     body,
+     uid:currentUser.uid,
+     author:profile.name||currentUser.displayName||"Member",
+     createdAt:stamp()
+   });
+   $(inputId).value="";
+   loadPosts(collection,target);
+ }catch(e){alert("Could not publish: "+e.message);}
+}
+
+async function loadPosts(collection,target){
+ if(!db)return;
+ try{
+   const s=await db.collection(collection).orderBy("createdAt","desc").limit(60).get();
+   $(target).innerHTML=s.empty
+    ?'<p class="muted">No posts yet. Be the first to contribute.</p>'
+    :s.docs.map(d=>{
+      const x=d.data();
+      return `<article class="entry">
+        <b>${safe(x.author||"Member")}</b>
+        <p>${safe(x.body)}</p>
+        <div class="entry-meta">${x.createdAt?.toDate?x.createdAt.toDate().toLocaleString():""}</div>
+        ${(admin()||(currentUser&&x.uid===currentUser.uid))
+          ?`<button class="btn danger" onclick="deleteRecord('${collection}','${d.id}')">Delete</button>`:""}
+      </article>`;
+    }).join("");
+ }catch(e){$(target).textContent="Could not load posts: "+e.message;}
+}
+
+async function publishNews(){
+ if(!admin())return alert("Administrator only.");
+ const title=$("newsTitle").value.trim();
+ const body=$("newsBody").value.trim();
+ if(!title||!body)return alert("Enter a title and announcement.");
+ try{
+   await db.collection("news").add({
+     title,body,author:currentUser.email,createdAt:stamp()
+   });
+   $("newsTitle").value="";
+   $("newsBody").value="";
+   loadNews("newsList");
+   loadNews("homeNews",3);
+ }catch(e){alert("Could not publish news: "+e.message);}
+}
+
+async function loadNews(target,limit=50){
+ if(!db)return;
+ try{
+   const s=await db.collection("news").orderBy("createdAt","desc").limit(limit).get();
+   $(target).innerHTML=s.empty
+    ?'<p class="muted">No announcements have been published yet.</p>'
+    :s.docs.map(d=>{
+      const x=d.data();
+      return `<article class="entry">
+        <h3>${safe(x.title)}</h3>
+        <p>${safe(x.body)}</p>
+        <div class="entry-meta">${safe(x.author||"KJBM MINDS")} · ${x.createdAt?.toDate?x.createdAt.toDate().toLocaleString():""}</div>
+        ${admin()?`<button class="btn danger" onclick="deleteRecord('news','${d.id}')">Delete</button>`:""}
+      </article>`;
+    }).join("");
+ }catch(e){$(target).textContent="News could not load: "+e.message;}
+}
+
+function setupUploader(page){
+ const cfg={
+  photos:{kind:"image",target:"photoUploader",label:"Photo",accept:"image/*"},
+  videos:{kind:"video",target:"videoUploader",label:"Video",accept:"video/*"},
+  documents:{kind:"raw",target:"documentUploader",label:"Document",accept:".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.zip"}
+ }[page];
+
+ $(cfg.target).innerHTML=`
+ <div class="uploader-login ${currentUser?"hidden":""} notice">Sign in to upload ${cfg.label.toLowerCase()}s.</div>
+ <div class="uploader-form ${currentUser?"":"hidden"}">
+ <div class="field"><label>${cfg.label} title (optional)</label><input id="${cfg.kind}Title" placeholder="Enter a title"></div>
+ <div class="field"><label>Select ${cfg.label.toLowerCase()}</label><input id="${cfg.kind}File" type="file" accept="${cfg.accept}"></div>
+ <button class="btn" id="${cfg.kind}UploadBtn" onclick="uploadToCloudinary('${cfg.kind}')">Upload ${cfg.label}</button>
+ <div class="progress"><span id="${cfg.kind}Bar"></span></div>
+ <div class="status" id="${cfg.kind}Status"></div>
+ </div>`;
+}
+
+function xhrUpload(url,form,onProgress){
+ return new Promise((resolve,reject)=>{
+   const x=new XMLHttpRequest();
+   x.open("POST",url);
+   x.upload.onprogress=e=>{
+     if(e.lengthComputable&&onProgress)onProgress(e.loaded/e.total*100);
+   };
+   x.onload=()=>{
+     let data={};
+     try{data=JSON.parse(x.responseText||"{}");}catch(e){}
+     if(x.status>=200&&x.status<300)resolve(data);
+     else reject(new Error(data.error?.message||"Cloudinary upload failed."));
+   };
+   x.onerror=()=>reject(new Error("Network error while contacting Cloudinary."));
+   x.send(form);
+ });
+}
+
+async function uploadToCloudinary(kind){
+ if(!mustSignIn())return;
+ const file=$(kind+"File").files[0];
+ if(!file)return alert("Please select a file.");
+
+ const resource=kind==="image"?"image":kind==="video"?"video":"raw";
+ const preset=CLOUDINARY_PRESETS[kind];
+ const endpoint=`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/${resource}/upload`;
+ const button=$(kind+"UploadBtn");
+ const bar=$(kind+"Bar");
+ const out=$(kind+"Status");
+ const title=$(kind+"Title").value.trim()||file.name;
+
+ button.disabled=true;
+ bar.style.width="0%";
+ out.textContent="Starting upload...";
+
+ try{
+   const form=new FormData();
+   form.append("file",file);
+   form.append("upload_preset",preset);
+   form.append("folder","kjbm_minds/"+kind);
+   form.append("context","title="+title);
+
+   const result=await xhrUpload(endpoint,form,p=>{
+     bar.style.width=p+"%";
+     out.textContent="Uploading "+Math.round(p)+"%";
+   });
+
+   if(!result.secure_url)throw new Error("Cloudinary did not return a file URL.");
+
+   await db.collection("uploads").add({
+     kind,title,fileName:file.name,
+     url:result.secure_url,
+     publicId:result.public_id||"",
+     resourceType:result.resource_type||resource,
+     format:result.format||"",
+     bytes:result.bytes||file.size,
+     uid:currentUser.uid,
+     author:profile.name||currentUser.displayName||"Member",
+     createdAt:stamp()
+   });
+
+   bar.style.width="100%";
+   out.textContent="Upload complete and saved to the KJBM MINDS library.";
+   $(kind+"File").value="";
+   loadUploads(kind==="image"?"photos":kind==="video"?"videos":"documents");
+ }catch(e){
+   console.error(e);
+   out.textContent="Upload failed: "+e.message;
+ }finally{
+   button.disabled=false;
+ }
+}
+
+async function loadUploads(page){
+ if(!db)return;
+ const kind=page==="photos"?"image":page==="videos"?"video":"raw";
+ const target=page==="photos"?"photoList":page==="videos"?"videoList":"documentList";
+ try{
+   const s=await db.collection("uploads").where("kind","==",kind).limit(100).get();
+   const docs=s.docs.sort((a,b)=>(b.data().createdAt?.seconds||0)-(a.data().createdAt?.seconds||0));
+
+   if(kind==="raw"){
+     $(target).innerHTML=docs.length?docs.map(d=>{
+       const x=d.data();
+       return `<article class="entry">
+         <b>${safe(x.title||x.fileName)}</b>
+         <p class="entry-meta">${safe(x.author||"Member")}</p>
+         <a href="${safe(x.url)}" target="_blank" rel="noopener">Open / Download</a>
+         ${admin()?` <button class="btn danger" onclick="deleteRecord('uploads','${d.id}')">Remove listing</button>`:""}
+       </article>`;
+     }).join(""):'<p class="muted">No documents have been uploaded yet.</p>';
+   }else{
+     $(target).innerHTML=docs.length?docs.map(d=>{
+       const x=d.data();
+       return `<div class="media-card">
+         ${kind==="image"
+          ?`<a href="${safe(x.url)}" target="_blank" rel="noopener"><img loading="lazy" src="${safe(x.url)}" alt="${safe(x.title||x.fileName)}"></a>`
+          :`<video controls preload="metadata" src="${safe(x.url)}"></video>`}
+         <strong>${safe(x.title||x.fileName)}</strong>
+         <span class="small muted">${safe(x.author||"Member")}</span>
+         ${admin()?`<div><button class="btn danger" onclick="deleteRecord('uploads','${d.id}')">Remove listing</button></div>`:""}
+       </div>`;
+     }).join(""):'<p class="muted">No uploads yet.</p>';
+   }
+ }catch(e){$(target).textContent="Could not load uploads: "+e.message;}
+}
+
+async function loadLearning(){
+ if(!db)return;
+ try{
+   const s=await db.collection("uploads").where("kind","==","raw").limit(100).get();
+   const docs=s.docs.sort((a,b)=>(b.data().createdAt?.seconds||0)-(a.data().createdAt?.seconds||0));
+   $("learningList").innerHTML=docs.length?docs.map(d=>{
+     const x=d.data();
+     return `<article class="entry">
+       <b>${safe(x.title||x.fileName)}</b>
+       <p class="entry-meta">Shared by ${safe(x.author||"Member")}</p>
+       <a href="${safe(x.url)}" target="_blank" rel="noopener">Download learning material</a>
+     </article>`;
+   }).join(""):'<p class="muted">No learning documents have been shared yet.</p>';
+ }catch(e){$("learningList").textContent="Could not load learning materials: "+e.message;}
+}
+
+async function loadMembers(){
+ if(!db)return;
+ try{
+   const s=await db.collection("publicProfiles").limit(100).get();
+   $("memberList").innerHTML=s.empty
+    ?'<p class="muted">No public member profiles yet.</p>'
+    :s.docs.map(d=>{
+      const x=d.data();
+      return `<div class="entry"><b>${safe(x.name||"KJBM MINDS Member")}</b><div class="entry-meta">Community member</div></div>`;
+    }).join("");
+ }catch(e){$("memberList").textContent="Could not load members. Check Firestore rules.";}
+}
+
+async function loadCommunityRules(){
+ if(!db)return;
+ try{
+   const doc=await db.collection("siteSettings").doc("communityRules").get();
+   $("publicRules").textContent=doc.exists
+    ?doc.data().text||"No community rules have been published."
+    :"Please respect other members, share responsibly, and use KJBM MINDS for learning and positive collaboration.";
+ }catch(e){
+   $("publicRules").textContent="Please respect other members and use KJBM MINDS responsibly.";
+ }
+}
+
+async function sendContact(){
+ const name=$("contactName").value.trim();
+ const email=$("contactEmail").value.trim();
+ const message=$("contactMessage").value.trim();
+ if(!name||!email||!message){
+   status("contactStatus","Please complete all fields.");
+   return;
+ }
+ try{
+   await db.collection("contactMessages").add({
+     name,email,message,createdAt:stamp()
+   });
+   $("contactMessage").value="";
+   status("contactStatus","Your message has been sent. Thank you.");
+ }catch(e){status("contactStatus","Message could not be sent: "+e.message);}
+}
+
+function adminTab(name,button){
+ document.querySelectorAll(".admin-section").forEach(x=>x.classList.remove("active"));
+ const section=$("admin-"+name);
+ if(section)section.classList.add("active");
+ document.querySelectorAll(".admin-tabs button").forEach(x=>x.classList.remove("active"));
+ if(button)button.classList.add("active");
+}
+
+async function copySecurityRules(){
+ try{
+   if(navigator.clipboard&&window.isSecureContext){
+     await navigator.clipboard.writeText(FIRESTORE_RULES);
+   }else{
+     const area=document.createElement("textarea");
+     area.value=FIRESTORE_RULES;
+     area.style.position="fixed";
+     area.style.opacity="0";
+     document.body.appendChild(area);
+     area.select();
+     const copied=document.execCommand("copy");
+     area.remove();
+     if(!copied)throw new Error("Copy was not successful. Select and copy the rules manually.");
+   }
+   status("rulesCopyStatus","Security rules copied. Open Firebase Console and publish them in Firestore → Rules.");
+ }catch(e){
+   status("rulesCopyStatus","Could not copy automatically. Press and hold the rules text to select and copy it.");
+ }
+}
+
+async function loadAdmin(){
+ if(!admin()||!db)return;
+ try{
+   const [u,p,a,m,n,d]=await Promise.all([
+     db.collection("users").get(),
+     db.collection("posts").get(),
+     db.collection("uploads").get(),
+     db.collection("contactMessages").orderBy("createdAt","desc").limit(30).get(),
+     db.collection("news").limit(50).get(),
+     db.collection("discussions").limit(50).get()
+   ]);
+
+   $("statMembers").textContent=u.size;
+   $("statPosts").textContent=p.size+d.size;
+   $("statUploads").textContent=a.size;
+   $("statMessages").textContent=m.size;
+
+   $("adminMembers").innerHTML=u.docs.map(doc=>{
+     const x=doc.data();
+     return `<div class="entry"><b>${safe(x.name||"Member")}</b><div class="entry-meta">${safe(x.email||"")}</div></div>`;
+   }).join("")||'<p class="muted">No members yet.</p>';
+
+   $("adminMessages").innerHTML=m.empty
+    ?'<p class="muted">No contact messages.</p>'
+    :m.docs.map(doc=>{
+      const x=doc.data();
+      return `<div class="entry">
+       <b>${safe(x.name)} · ${safe(x.email)}</b>
+       <p>${safe(x.message)}</p>
+       <div class="entry-meta">${x.createdAt?.toDate?x.createdAt.toDate().toLocaleString():""}</div>
+       <button class="btn danger" onclick="deleteRecord('contactMessages','${doc.id}')">Delete message</button>
+      </div>`;
+    }).join("");
+
+   $("adminUploads").innerHTML=a.empty
+    ?'<p class="muted">No uploads yet.</p>'
+    :a.docs.map(doc=>{
+      const x=doc.data();
+      return `<div class="entry">
+       <b>${safe(x.title||x.fileName||"Upload")}</b>
+       <div class="entry-meta">${safe(x.kind||"file")} · ${safe(x.author||"Member")}</div>
+       <a href="${safe(x.url)}" target="_blank" rel="noopener">Open file</a>
+       <button class="btn danger" onclick="deleteRecord('uploads','${doc.id}')">Remove listing</button>
+      </div>`;
+    }).join("");
+
+   $("adminPosts").innerHTML=p.empty
+    ?'<p class="muted">No community posts.</p>'
+    :p.docs.map(doc=>{
+      const x=doc.data();
+      return `<div class="entry"><b>${safe(x.author||"Member")}</b><p>${safe(x.body)}</p><button class="btn danger" onclick="deleteRecord('posts','${doc.id}')">Delete post</button></div>`;
+    }).join("");
+
+   $("adminDiscussions").innerHTML=d.empty
+    ?'<p class="muted">No discussions.</p>'
+    :d.docs.map(doc=>{
+      const x=doc.data();
+      return `<div class="entry"><b>${safe(x.author||"Member")}</b><p>${safe(x.body)}</p><button class="btn danger" onclick="deleteRecord('discussions','${doc.id}')">Delete discussion</button></div>`;
+    }).join("");
+
+   $("adminNews").innerHTML=n.empty
+    ?'<p class="muted">No announcements.</p>'
+    :n.docs.map(doc=>{
+      const x=doc.data();
+      return `<div class="entry"><b>${safe(x.title)}</b><p>${safe(x.body)}</p><button class="btn danger" onclick="deleteRecord('news','${doc.id}')">Delete announcement</button></div>`;
+    }).join("");
+
+ }catch(e){
+   $("adminMessage").textContent="Admin data could not load: "+e.message;
+ }
+}
+
+async function deleteRecord(collection,id){
+ if(!admin())return alert("Administrator only.");
+ if(!confirm("Remove this database record? Removing an upload listing does not delete the original Cloudinary file."))return;
+ try{
+   await db.collection(collection).doc(id).delete();
+   if(collection==="news"){loadNews("newsList");loadNews("homeNews",3);}
+   if(collection==="posts")loadPosts("posts","communityList");
+   if(collection==="discussions")loadPosts("discussions","forumList");
+   if(collection==="uploads"){
+     loadUploads("photos");loadUploads("videos");loadUploads("documents");
+   }
+   loadAdmin();
+ }catch(e){alert("Could not remove record: "+e.message);}
+}
+
+async function saveCommunityRules(){
+ if(!admin())return alert("Administrator only.");
+ const text=$("adminRulesText").value.trim();
+ if(!text)return alert("Enter the community rules first.");
+ try{
+   await db.collection("siteSettings").doc("communityRules").set({
+     text,updatedAt:stamp(),updatedBy:currentUser.email
+   });
+   status("communityRulesStatus","Community rules saved successfully.");
+   loadCommunityRules();
+ }catch(e){status("communityRulesStatus","Could not save rules: "+e.message);}
+}
+
+function renderDashboard(){
+ if(!currentUser){
+   $("dashboardInfo").textContent="Please sign in to access your dashboard.";
+   return;
+ }
+ updateInterface();
+}
+
+init();
+</script>
+</body>
+</html>
