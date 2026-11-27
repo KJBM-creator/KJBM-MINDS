@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="XWf6OOLDaEIYY1qzo8JPEnIRw9fllyeb6rPT8HZWEIY">
+<title>KJBM MINDS | Official Community</title>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#080808;color:white;
+ font-family:Arial,sans-serif;
+}
+header{
+ background:#111;padding:25px 12px;text-align:center;
+ border-bottom:2px solid #d4af37;
+}
+header h1{
+ color:#d4af37;font-size:30px;margin:5px;
+ letter-spacing:3px;
+}
+header p{color:#ddd}
+nav{
+ display:flex;flex-wrap:wrap;justify-content:center;
+ background:#171717;padding:10px;gap:7px;
+}
+nav button{
+ background:#242424;color:#d4af37;
+ border:1px solid #d4af37;padding:11px 14px;
+ border-radius:6px;cursor:pointer;
+}
+nav button:hover{background:#d4af37;color:#000}
+main{max-width:950px;margin:auto;padding:15px}
+section{
+ display:none;padding:20px;margin:15px 0;
+ background:#151515;border:1px solid #8e7021;
+ border-radius:12px;
+}
+section.active{display:block}
+h2,h3{color:#d4af37}
+input,textarea,select{
+ width:100%;padding:13px;margin:8px 0;
+ background:#090909;border:1px solid #b99732;
+ border-radius:6px;color:white;
+}
+button.action{
+ background:#d4af37;color:#000;padding:12px 20px;
+ border:0;border-radius:6px;font-weight:bold;
+ margin:5px 2px;cursor:pointer;
+}
+button.action:hover{background:#fff}
+button:disabled{opacity:.5;cursor:not-allowed}
+.card{
+ background:#222;border:1px solid #80651e;
+ padding:15px;border-radius:8px;margin:12px 0;
+}
+.gold{color:#d4af37}
+img,video{max-width:100%;border-radius:8px;margin-top:10px}
+footer{
+ text-align:center;padding:25px;
+ border-top:1px solid #d4af37;color:#aaa;
+}
+a{color:#d4af37;overflow-wrap:anywhere}
+.status{margin:10px 0;overflow-wrap:anywhere}
+.small{font-size:13px;color:#bbb}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>KJBM MINDS</h1>
+<p>Knowledge • Innovation • Growth • Community</p>
+</header>
+
+<nav>
+<button onclick="showTab('home')">Home</button>
+<button onclick="showTab('about')">About Us</button>
+<button onclick="showTab('account')">Login / Register</button>
+<button onclick="showTab('dashboard')">Dashboard</button>
+<button onclick="showTab('community')">Community</button>
+<button onclick="showTab('uploads')">Uploads</button>
+<button onclick="showTab('admin')">Admin</button>
+<button onclick="showTab('contact')">Contact</button>
+</nav>
+
+<main>
+
+<section id="home" class="active">
+<h2>WELCOME TO KJBM MINDS</h2>
+<h3>A Community of Knowledge and Innovation</h3>
+<p>
+Welcome to KJBM MINDS, a platform dedicated to education,
+learning, creativity, sharing knowledge and empowering people.
+</p>
+<div class="card">
+<h3>Our Mission</h3>
+<p>To create opportunities for learning, sharing ideas and developing talents.</p>
+</div>
+<div class="card">
+<h3>Our Vision</h3>
+<p>To build an informed, creative and connected community.</p>
+</div>
+</section>
+
+<section id="about">
+<h2>ABOUT KJBM MINDS</h2>
+<p>
+KJBM MINDS is an educational and community platform
+where members can connect, share knowledge and access
+educational resources.
+</p>
+<h3>What We Offer</h3>
+<ul>
+<li>Educational resources</li>
+<li>Community discussions</li>
+<li>Photo and video sharing</li>
+<li>Document sharing</li>
+<li>Member accounts</li>
+<li>News and announcements</li>
+</ul>
+</section>
+
+<section id="account">
+<h2>MEMBER ACCOUNT</h2>
+
+<div class="card">
+<h3>Register</h3>
+<input id="regName" placeholder="Full name">
+<input id="regEmail" type="email" placeholder="Email address">
+<input id="regPassword" type="password" placeholder="Create password">
+<button class="action" onclick="register()">Create Account</button>
+</div>
+
+<div class="card">
+<h3>Login</h3>
+<input id="loginEmail" type="email" placeholder="Email address">
+<input id="loginPassword" type="password" placeholder="Password">
+<button class="action" onclick="login()">Login</button>
+<button class="action" onclick="resetPassword()">Forgot Password?</button>
+</div>
+<p id="authMessage" class="gold status"></p>
+</section>
+
+<section id="dashboard">
+<h2>MEMBER DASHBOARD</h2>
+<div class="card">
+<h3>Welcome, <span id="memberName">Member</span></h3>
+<p id="memberEmail"></p>
+<p id="memberRole" class="gold"></p>
+<button class="action" onclick="showTab('uploads')">Upload Files</button>
+<button class="action" onclick="showTab('community')">Visit Community</button>
+<button class="action" onclick="logout()">Sign Out</button>
+</div>
+</section>
+
+<section id="community">
+<h2>KJBM COMMUNITY</h2>
+<p>Share educational ideas and announcements with other members.</p>
+<div class="card">
+<h3>Create a Post</h3>
+<textarea id="postText" rows="4" placeholder="Write your message..."></textarea>
+<button class="action" onclick="createPost()">Publish Post</button>
+</div>
+<h3>Community Posts</h3>
+<div id="posts">Loading posts...</div>
+</section>
+
+<section id="uploads">
+<h2>MEMBER FILE UPLOADS</h2>
+<p>Share learning materials with the KJBM MINDS community.</p>
+
+<div class="card">
+<h3>Upload Photo, Video or Document</h3>
+<input type="file" id="fileInput"
+accept="image/*,video/*,.pdf,.doc,.docx,.ppt,.pptx,.txt">
+
+<p class="small">
+Supported: JPG, PNG, GIF, MP4, MOV, PDF, DOC, DOCX, PPT, PPTX and TXT.
+Maximum file size: 50 MB.
+</p>
+
+<button class="action" id="uploadButton" onclick="uploadFile()">Upload File</button>
+<p id="uploadMessage" class="gold status"></p>
+</div>
+
+<h3>Shared Files</h3>
+<div id="fileGallery">Loading files...</div>
+</section>
+
+<section id="admin">
+<h2>ADMIN DASHBOARD</h2>
+<div class="card">
+<p id="adminStatus">Checking administrator access...</p>
+<h3>Website Management</h3>
+<p>Administrators can manage community posts and review shared files.</p>
+<button class="action" onclick="loadPosts()">Refresh Posts</button>
+<button class="action" onclick="loadFiles()">Refresh Uploads</button>
+</div>
+</section>
+
+<section id="contact">
+<h2>CONTACT US</h2>
+<div class="card">
+<h3>Get in Touch</h3>
+<p>For questions, suggestions and support, contact KJBM MINDS.</p>
+<p>Email:
+<a href="mailto:johnmiraclekb652@gmail.com">johnmiraclekb652@gmail.com</a>
+</p>
+</div>
+<div class="card">
+<h3>Send a Message</h3>
+<input id="contactName" placeholder="Your name">
+<input id="contactEmail" type="email" placeholder="Your email">
+<textarea id="contactMessage" rows="4" placeholder="Your message"></textarea>
+<button class="action" onclick="sendMessage()">Send Message</button>
+<p id="contactStatus" class="gold status"></p>
+</div>
+</section>
+
+</main>
+
+<footer>
+<p>© 2026 KJBM MINDS. All Rights Reserved.</p>
+<p>Knowledge • Innovation • Growth</p>
+</footer>
+
+<script>
+// FIREBASE CONFIGURATION
+const firebaseConfig = {
+ apiKey: "AIzaSyBq41YUdJcsDUHNtBpEdv7JdF5D87dYp6k",
+ authDomain: "kjbm-minds.firebaseapp.com",
+ projectId: "kjbm-minds",
+ storageBucket: "kjbm-minds.firebasestorage.app",
+ messagingSenderId: "227909064382",
+ appId: "1:227909064382:web:586232a2233804565a70ef",
+ measurementId: "G-9KVQBP569S"
+};
+
+// CLOUDINARY CONFIGURATION
+const CLOUD_NAME = "ldrdbzqf";
+const UPLOAD_PRESET = "kjbm_documents";
+
+let auth = null;
+let db = null;
+let currentUser = null;
+let currentRole = "member";
+
+try {
+ if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+ }
+ auth = firebase.auth();
+ db = firebase.firestore();
+} catch(error) {
+ alert("Firebase initialization error: " + error.message);
+}
+
+// NAVIGATION
+function showTab(id) {
+ document.querySelectorAll("main section").forEach(section => {
+  section.classList.remove("active");
+ });
+ document.getElementById(id).classList.add("active");
+
+ if(id === "community") loadPosts();
+ if(id === "uploads") loadFiles();
+ if(id === "admin") checkAdmin();
+}
+
+// REGISTRATION
+async function register() {
+ const name = document.getElementById("regName").value.trim();
+ const email = document.getElementById("regEmail").value.trim();
+ const password = document.getElementById("regPassword").value;
+
+ if(!name || !email || !password) {
+  alert("Please complete all registration fields.");
+  return;
+ }
+
+ try {
+  const result = await auth.createUserWithEmailAndPassword(email,password);
+
+  await db.collection("users").doc(result.user.uid).set({
+   name:name,
+   email:email,
+   role:"member",
+   createdAt:firebase.firestore.FieldValue.serverTimestamp()
+  });
+
+  await result.user.updateProfile({displayName:name});
+
+  document.getElementById("authMessage").innerText =
+   "Account created successfully!";
+
+ } catch(error) {
+  document.getElementById("authMessage").innerText = error.message;
+ }
+}
+
+// LOGIN
+async function login() {
+ const email = document.getElementById("loginEmail").value.trim();
+ const password = document.getElementById("loginPassword").value;
+
+ try {
+  await auth.signInWithEmailAndPassword(email,password);
+  document.getElementById("authMessage").innerText = "Login successful!";
+ } catch(error) {
+  document.getElementById("authMessage").innerText = error.message;
+ }
+}
+
+// PASSWORD RECOVERY
+async function resetPassword() {
+ const email = document.getElementById("loginEmail").value.trim();
+
+ if(!email) {
+  alert("Enter your email address first.");
+  return;
+ }
+
+ try {
+  await auth.sendPasswordResetEmail(email);
+  alert("Password recovery email sent.");
+ } catch(error) {
+  alert(error.message);
+ }
+}
+
+// SIGN OUT
+async function logout() {
+ try {
+  await auth.signOut();
+  showTab("home");
+ } catch(error) {
+  alert(error.message);
+ }
+}
+
+// AUTHENTICATION STATE
+if(auth) {
+ auth.onAuthStateChanged(async user => {
+  currentUser = user;
+
+  if(user) {
+   try {
+    const doc = await db.collection("users").doc(user.uid).get();
+    const data = doc.exists ? doc.data() : {};
+
+    currentRole = data.role || "member";
+
+    document.getElementById("memberName").innerText =
+     data.name || user.displayName || "Member";
+
+    document.getElementById("memberEmail").innerText = user.email;
+    document.getElementById("memberRole").innerText = "Role: " + currentRole;
+
+    showTab("dashboard");
+   } catch(error) {
+    console.error(error);
+    alert("Could not load your profile: " + error.message);
+   }
+  } else {
+   currentRole = "member";
+   document.getElementById("memberName").innerText = "Guest";
+   document.getElementById("memberEmail").innerText = "";
+   showTab("home");
+  }
+ });
+}
+
+// CREATE COMMUNITY POST
+async function createPost() {
+ if(!currentUser) {
+  alert("Please login first.");
+  return;
+ }
+
+ const content = document.getElementById("postText").value.trim();
+ if(!content) return;
+
+ try {
+  await db.collection("posts").add({
+   content:content,
+   author:currentUser.displayName || currentUser.email,
+   uid:currentUser.uid,
+   createdAt:firebase.firestore.FieldValue.serverTimestamp()
+  });
+
+  document.getElementById("postText").value = "";
+  loadPosts();
+ } catch(error) {
+  alert("Post error: " + error.message);
+ }
+}
+
+// LOAD COMMUNITY POSTS
+async function loadPosts() {
+ const container = document.getElementById("posts");
+
+ try {
+  const snapshot = await db.collection("posts")
+   .orderBy("createdAt","desc").limit(30).get();
+
+  container.innerHTML = "";
+
+  snapshot.forEach(doc => {
+   const data = doc.data();
+   const card = document.createElement("div");
+   card.className = "card";
+
+   const author = document.createElement("h3");
+   author.textContent = data.author || "Member";
+
+   const message = document.createElement("p");
+   message.textContent = data.content || "";
+
+   card.append(author,message);
+
+   if(currentRole === "admin") {
+    const del = document.createElement("button");
+    del.className = "action";
+    del.textContent = "Delete Post";
+    del.onclick = () => deletePost(doc.id);
+    card.appendChild(del);
+   }
+
+   container.appendChild(card);
+  });
+
+  if(snapshot.empty) container.innerText = "No community posts yet.";
+
+ } catch(error) {
+  container.innerText = "Unable to load posts: " + error.message;
+ }
+}
+
+async function deletePost(id) {
+ if(currentRole !== "admin") return;
+
+ if(confirm("Delete this post?")) {
+  try {
+   await db.collection("posts").doc(id).delete();
+   loadPosts();
+  } catch(error) {
+   alert(error.message);
+  }
+ }
+}
+
+// FILE UPLOAD
+async function uploadFile() {
+ if(!currentUser) {
+  alert("Please login first.");
+  return;
+ }
+
+ const input = document.getElementById("fileInput");
+ const file = input.files[0];
+ const message = document.getElementById("uploadMessage");
+ const button = document.getElementById("uploadButton");
+
+ if(!file) {
+  alert("Choose a file first.");
+  return;
+ }
+
+ if(file.size > 50 * 1024 * 1024) {
+  alert("File is too large. Maximum size is 50 MB.");
+  return;
+ }
+
+ let resourceType;
+
+ if(file.type.startsWith("image/")) {
+  resourceType = "image";
+ } else if(file.type.startsWith("video/")) {
+  resourceType = "video";
+ } else {
+  resourceType = "raw";
+ }
+
+ button.disabled = true;
+ message.innerText = "Uploading " + file.name + "...";
+
+ try {
+  const formData = new FormData();
+  formData.append("file",file);
+  formData.append("upload_preset",UPLOAD_PRESET);
+
+  const url =
+   "https://api.cloudinary.com/v1_1/" +
+   CLOUD_NAME + "/" + resourceType + "/upload";
+
+  const response = await fetch(url,{
+   method:"POST",
+   body:formData
+  });
+
+  const result = await response.json();
+
+  if(!response.ok) {
+   throw new Error(result.error?.message || "Cloudinary upload failed.");
+  }
+
+  // SAVE FILE DETAILS IN FIRESTORE
+  await db.collection("uploads").add({
+   name:file.name,
+   url:result.secure_url,
+   type:resourceType,
+   format:result.format || "",
+   author:currentUser.email,
+   uid:currentUser.uid,
+   createdAt:firebase.firestore.FieldValue.serverTimestamp()
+  });
+
+  message.innerText = "SUCCESS! Your file has been uploaded.";
+  input.value = "";
+  await loadFiles();
+
+ } catch(error) {
+  message.innerText = "UPLOAD ERROR: " + error.message;
+ } finally {
+  button.disabled = false;
+ }
+}
+
+// DISPLAY SHARED FILES
+async function loadFiles() {
+ const gallery = document.getElementById("fileGallery");
+
+ try {
+  const snapshot = await db.collection("uploads")
+   .orderBy("createdAt","desc").limit(50).get();
+
+  gallery.innerHTML = "";
+
+  snapshot.forEach(doc => {
+   const file = doc.data();
+   const card = document.createElement("div");
+   card.className = "card";
+
+   const title = document.createElement("h3");
+   title.textContent = file.name || "Shared file";
+   card.appendChild(title);
+
+   const author = document.createElement("p");
+   author.textContent = "Uploaded by: " + (file.author || "Member");
+   card.appendChild(author);
+
+   if(file.type === "image") {
+    const img = document.createElement("img");
+    img.src = file.url;
+    img.alt = file.name || "Shared image";
+    img.loading = "lazy";
+    card.appendChild(img);
+
+   } else if(file.type === "video") {
+    const video = document.createElement("video");
+    video.src = file.url;
+    video.controls = true;
+    video.preload = "metadata";
+    card.appendChild(video);
+   }
+
+   const link = document.createElement("a");
+   link.href = file.url;
+   link.target = "_blank";
+   link.rel = "noopener";
+   link.textContent = "Open / Download File";
+   card.appendChild(link);
+
+   gallery.appendChild(card);
+  });
+
+  if(snapshot.empty) {
+   gallery.innerText = "No files have been shared yet.";
+  }
+
+ } catch(error) {
+  gallery.innerText = "Unable to load files: " + error.message;
+ }
+}
+
+// ADMIN ACCESS
+async function checkAdmin() {
+ const status = document.getElementById("adminStatus");
+
+ if(!currentUser) {
+  status.innerText = "Please login first.";
+  return;
+ }
+
+ try {
+  const doc = await db.collection("users").doc(currentUser.uid).get();
+  const role = doc.exists ? doc.data().role : "member";
+
+  currentRole = role || "member";
+
+  if(currentRole === "admin") {
+   status.innerText = "Administrator access confirmed.";
+   loadPosts();
+   loadFiles();
+  } else {
+   status.innerText = "Access denied. Administrator account required.";
+  }
+
+ } catch(error) {
+  status.innerText = error.message;
+ }
+}
+
+// CONTACT MESSAGE
+async function sendMessage() {
+ const name = document.getElementById("contactName").value.trim();
+ const email = document.getElementById("contactEmail").value.trim();
+ const message = document.getElementById("contactMessage").value.trim();
+
+ if(!name || !email || !message) {
+  alert("Complete all contact fields.");
+  return;
+ }
+
+ try {
+  await db.collection("messages").add({
+   name:name,
+   email:email,
+   message:message,
+   createdAt:firebase.firestore.FieldValue.serverTimestamp()
+  });
+
+  document.getElementById("contactStatus").innerText =
+   "Message submitted successfully!";
+
+  document.getElementById("contactMessage").value = "";
+
+ } catch(error) {
+  document.getElementById("contactStatus").innerText = error.message;
+ }
+}
+</script>
+
+</body>
+</html>
